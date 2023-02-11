@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { EditorState } from 'draft-js';
+import { EditorState, SelectionState, Modifier } from 'draft-js';
 import classNames from 'classnames';
 import Option from '../../components/Option';
 import './styles.css';
@@ -27,12 +27,24 @@ const getImageComponent = config => class Image extends Component {
     const { block, contentState } = this.props;
     const entityKey = block.getEntityAt(0);
     console.log('entityKey', entityKey)
-    const newBlockMap = contentState.blockMap.delete(entityKey)  // this is the important one that actually deletes a block
-    console.log('newBlockMap', newBlockMap)
-    const newContentState = contentState.set('blockMap', newBlockMap)
-    // const newEditorState = EditorState.push(editorState, newContentState, 'remove-block')
-    config.onChange(EditorState.push(config.getEditorState(), newContentState, 'remove-block'));
-    // config.onChange(EditorState.push(config.getEditorState(), contentState, 'change-block-data'));
+    // const newBlockMap = contentState.blockMap.delete(entityKey)  // this is the important one that actually deletes a block
+    // console.log('newBlockMap', newBlockMap)
+    // const newContentState = contentState.set('blockMap', newBlockMap)
+    // // const newEditorState = EditorState.push(editorState, newContentState, 'remove-block')
+    // config.onChange(EditorState.push(config.getEditorState(), newContentState, 'remove-block'));
+    // // config.onChange(EditorState.push(config.getEditorState(), contentState, 'change-block-data'));
+    // this.setState({
+    //   dummy: true,
+    // });
+
+    const mySelection = SelectionState.createEmpty(block.getKey());
+    const updatedSelection = mySelection.merge({
+      anchorOffset: 0,
+      focusOffset: block.getText().length
+    })
+    const newContentState = Modifier.applyEntity(contentState, updatedSelection, null);
+
+    config.onChange(EditorState.set(config.getEditorState(), { currentContent: newContentState }));
     this.setState({
       dummy: true,
     });
