@@ -69,6 +69,7 @@ const getImageComponent = config => class Image extends Component {
   };
 
   toggleHovered: Function = (): void => {
+    console.log('editorState.getSelection()', config.getEditorState().getSelection())
     const hovered = !this.state.hovered;
     this.setState({
       hovered,
@@ -143,7 +144,7 @@ const getImageComponent = config => class Image extends Component {
             }}
           />
           {
-            !isReadOnly() && hovered && isImageAlignmentEnabled() ?
+            !isReadOnly() && hovered ?
               this.renderAlignmentOptions(alignment)
               :
               undefined
