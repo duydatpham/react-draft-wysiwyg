@@ -37,7 +37,7 @@ const getImageComponent = config => class Image extends Component {
     //   dummy: true,
     // });
 
-    const mySelection = SelectionState.createEmpty(block.getKey());
+    const mySelection = SelectionState.createEmpty(entityKey);
     const updatedSelection = mySelection.merge({
       anchorOffset: 0,
       focusOffset: block.getText().length
