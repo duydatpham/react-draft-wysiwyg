@@ -28,7 +28,7 @@ const getImageComponent = config => class Image extends Component {
     const entityKey = block.getEntityAt(0);
     console.log('entityKey', entityKey, block.getKey())
     const newBlockMap = contentState.blockMap.delete(block.getKey())  // this is the important one that actually deletes a block
-    console.log('newBlockMap', newBlockMap)
+    // console.log('newBlockMap', newBlockMap)
     const newContentState = contentState.set('blockMap', newBlockMap)
     // const newEditorState = EditorState.push(editorState, newContentState, 'remove-block')
     config.onChange(EditorState.push(config.getEditorState(), newContentState, 'remove-block'));
@@ -85,7 +85,7 @@ const getImageComponent = config => class Image extends Component {
           },
         )}
       >
-        <Option
+        {/* <Option
           onClick={this.setEntityAlignmentLeft}
           className="rdw-image-alignment-option"
         >
@@ -102,7 +102,7 @@ const getImageComponent = config => class Image extends Component {
           className="rdw-image-alignment-option"
         >
           Right
-        </Option>
+        </Option> */}
         <Option
           onClick={this.deleteItem}
           className="rdw-image-alignment-option"
