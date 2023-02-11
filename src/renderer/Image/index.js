@@ -23,6 +23,19 @@ const getImageComponent = config => class Image extends Component {
     this.setEntityAlignment('right');
   };
 
+  deleteItem: Function = (): void => {
+    const { block, contentState } = this.props;
+    const entityKey = block.getEntityAt(0);
+    const newBlockMap = contentState.blockMap.delete(entityKey)  // this is the important one that actually deletes a block
+    const newContentState = contentState.set('blockMap', newBlockMap)
+    // const newEditorState = EditorState.push(editorState, newContentState, 'remove-block')
+    config.onChange(EditorState.push(config.getEditorState(), newContentState, 'remove-block'));
+    // config.onChange(EditorState.push(config.getEditorState(), contentState, 'change-block-data'));
+    this.setState({
+      dummy: true,
+    });
+  };
+
   setEntityAlignmentCenter: Function = (): void => {
     this.setEntityAlignment('none');
   };
@@ -76,7 +89,7 @@ const getImageComponent = config => class Image extends Component {
           Right
         </Option> */}
         <Option
-          onClick={this.setEntityAlignmentRight}
+          onClick={this.deleteItem}
           className="rdw-image-alignment-option"
         >
           <span style={{ color: 'red' }} >Xoá</span>
