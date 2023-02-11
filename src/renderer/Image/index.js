@@ -27,28 +27,28 @@ const getImageComponent = config => class Image extends Component {
     const { block, contentState } = this.props;
     const entityKey = block.getEntityAt(0);
     console.log('entityKey', entityKey, block.getKey())
-    // const newBlockMap = contentState.blockMap.delete(entityKey)  // this is the important one that actually deletes a block
-    // console.log('newBlockMap', newBlockMap)
-    // const newContentState = contentState.set('blockMap', newBlockMap)
-    // // const newEditorState = EditorState.push(editorState, newContentState, 'remove-block')
-    // config.onChange(EditorState.push(config.getEditorState(), newContentState, 'remove-block'));
-    // // config.onChange(EditorState.push(config.getEditorState(), contentState, 'change-block-data'));
-    // this.setState({
-    //   dummy: true,
-    // });
-
-    const mySelection = SelectionState.createEmpty(entityKey);
-    const updatedSelection = mySelection.merge({
-      anchorOffset: 0,
-      focusOffset: block.getText().length
-    })
-    const newContentState = Modifier.applyEntity(contentState, updatedSelection, null);
-
-    // config.onChange(EditorState.set(config.getEditorState(), { currentContent: newContentState }));
-    config.onChange(EditorState.push(config.getEditorState(), newContentState, 'change-block-data'));
+    const newBlockMap = contentState.blockMap.delete(block.getKey())  // this is the important one that actually deletes a block
+    console.log('newBlockMap', newBlockMap)
+    const newContentState = contentState.set('blockMap', newBlockMap)
+    // const newEditorState = EditorState.push(editorState, newContentState, 'remove-block')
+    config.onChange(EditorState.push(config.getEditorState(), newContentState, 'remove-block'));
+    // config.onChange(EditorState.push(config.getEditorState(), contentState, 'change-block-data'));
     this.setState({
       dummy: true,
     });
+
+    // const mySelection = SelectionState.createEmpty(entityKey);
+    // const updatedSelection = mySelection.merge({
+    //   anchorOffset: 0,
+    //   focusOffset: block.getText().length
+    // })
+    // const newContentState = Modifier.applyEntity(contentState, updatedSelection, null);
+
+    // // config.onChange(EditorState.set(config.getEditorState(), { currentContent: newContentState }));
+    // config.onChange(EditorState.push(config.getEditorState(), newContentState, 'change-block-data'));
+    // this.setState({
+    //   dummy: true,
+    // });
   };
 
   setEntityAlignmentCenter: Function = (): void => {
