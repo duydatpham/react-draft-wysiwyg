@@ -44,7 +44,8 @@ const getImageComponent = config => class Image extends Component {
     })
     const newContentState = Modifier.applyEntity(contentState, updatedSelection, null);
 
-    config.onChange(EditorState.set(config.getEditorState(), { currentContent: newContentState }));
+    // config.onChange(EditorState.set(config.getEditorState(), { currentContent: newContentState }));
+    config.onChange(EditorState.push(config.getEditorState(), newContentState, 'change-block-data'));
     this.setState({
       dummy: true,
     });
