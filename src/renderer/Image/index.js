@@ -26,7 +26,7 @@ const getImageComponent = config => class Image extends Component {
   deleteItem: Function = (): void => {
     const { block, contentState } = this.props;
     const entityKey = block.getEntityAt(0);
-    console.log('entityKey', entityKey)
+    console.log('entityKey', entityKey, block.getKey())
     // const newBlockMap = contentState.blockMap.delete(entityKey)  // this is the important one that actually deletes a block
     // console.log('newBlockMap', newBlockMap)
     // const newContentState = contentState.set('blockMap', newBlockMap)
