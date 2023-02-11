@@ -85,7 +85,7 @@ const getImageComponent = config => class Image extends Component {
           },
         )}
       >
-        {/* <Option
+        <Option
           onClick={this.setEntityAlignmentLeft}
           className="rdw-image-alignment-option"
         >
@@ -102,7 +102,7 @@ const getImageComponent = config => class Image extends Component {
           className="rdw-image-alignment-option"
         >
           Right
-        </Option> */}
+        </Option>
         <Option
           onClick={this.deleteItem}
           className="rdw-image-alignment-option"
